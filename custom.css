@@ -1,0 +1,16 @@
+/* Custom CSS to center tables */
+table {
+  margin-left:0;
+  margin-right: auto;
+}
+
+/* Custom CSS to center images */
+.medium-zoom-image {
+  display: block;
+  margin: 0 auto;
+  max-width: 50%;
+}
+
+img{
+  max-width: 50%;
+}
