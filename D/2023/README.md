@@ -93,21 +93,21 @@
 
 先思考一下，应该用镶嵌工具，那么在哪？
 
-<img src="README/image-20230815094621335.png" alt="image-20230815094621335" style="zoom:50%;" />
+![](README/image-20230815094621335.png)
 
 哦在这宝贝，$数据管理\to栅格\to栅格数据集\to镶嵌$。
 
 裁剪也在旁边哦
 
-<img src="README/image-20230815100645493.png" alt="image-20230815100645493" style="zoom:50%;" />
+![image-20230815234414946](README/image-20230815234414946.png)
 
 裁剪完后出现这种情况应该怎么处理？
 
-<img src="README/image-20230815101638425.png" alt="image-20230815101638425" style="zoom:50%;" />
+![image-20230815234421666](README/image-20230815234421666.png)
 
 率先想到的是重分类，但是基本的重分类要全部点掉....算了还是先做栅格运算吧。
 
-<img src="README/image-20230815101903878.png" alt="image-20230815101903878" style="zoom:50%;" />
+![image-20230815234426068](README/image-20230815234426068.png)
 
 工作是利用条件函数`con`，`con(A>x,1,0)`，满足条件取1，不满足取0。
 
