@@ -8,9 +8,9 @@ table {
 .medium-zoom-image {
   display: block;
   margin: 0 auto;
-  max-width: 50%;
+  max-width: 15%;
 }
 
 img{
-  max-width: 30%;
+  max-width: 50%;
 }
