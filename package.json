@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@guoqzuo/vue-chart": "^0.1.6",
+    "echarts": "^5.4.3"
+  }
+}
