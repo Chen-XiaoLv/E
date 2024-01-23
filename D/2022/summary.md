@@ -141,10 +141,6 @@ by the way, 梁艺馨说她耳朵长了息肉，去做了手术。
 
 但好在的是，与韩雪的沟通下，以及与唐家奎的沟通下，发现事情还有转机。就是太麻烦人家了，而就是我的这种怕麻烦，令我如今难成一事。
 
-8月17号，政审表算是解决了。欠了韩雪一个人情。这辈子我会还给她的。
-
----
-
 关于身份证，倒是没啥办法了。
 
 团员证的事情，也只能摆烂了。虽然很不希望看到这种局面。但说实话，目前的团组织关系已经转移，我也带了团组织介绍信。如果再不行的话，也只能作罢了。28岁自动退团，入党也不在我的职业规划内。
@@ -268,7 +264,7 @@ UCAS的校园，逛了下操场、学生会堂和超市。
 
 什么意思呢，比如一个数:[1,2,3,4,5,6]
 
-我抽掉任何一个数，计数频次都是1，那么长度就是N-1！、
+我抽掉任何一个数，计数频次都是1，那么长度就是N-1！
 
 而比如[2,2,3,3,4,4,4]，抽掉一个4，可以拿到前缀[2,2,3,3,4,4]!
 
@@ -417,160 +413,7 @@ while 1:
 
 解锁成就：我在LeetCode学单词哈哈哈哈
 
-这玩意奇奇怪怪的，比南师大的压轴算法难多了，南师大的算法就是个寄吧
-
-首先，如果遍历每个点，那势必会造成不必要的开销。
-
-为什么我们不能逆向思维呢？
-
-从接触点出发，同时被两种情况所覆盖的点，就是所需求的点。
-
-这个想法可以推广到更高的维度和更广的问题上。
-
-同样，采用dfs遍历图结构，为了避免开销，一般会使用一个visit矩阵，记录使用过的点。
-
-整个算法如下:
-
-```python
- # To avoid this situtation, we can start at the border.
-        # So we only have to calculate each points once.
-
-        # Start from the Top and the right. If one points can be flowed, we will add that point to Pacificset.
-        # The PacificSet means the point which could be flowed from top-right points.
-        # The altanticSet means the point that could be flowed from bottom-left points.
-
-        # If we make them into one set, than we will gain a set which include a point that could be flowed from both top-right and bottom-left.
-
-        m,n=len(heights),len(heights[0])
-        def search(start):
-            # To avoid repetition
-            visitSet=set()
-            def dfs(x,y):
-                if (x,y) in visitSet:
-                    return 
-                val=heights[x][y]
-                visitSet.add((x,y))
-                for i,j in [[x+1,y],[x-1,y],[x,y-1],[x,y+1]]:
-                    # Taller than it and within range
-                    if 0<=i<m and 0<=j<n and heights[i][j]>=val:
-                        dfs(i,j)
-                
-
-            for i,j in start:
-                dfs(i,j)
-            return visitSet 
-        
-        pacificSet=[(0,i) for i in range(n)]+[(i,0) for i in range(m)]
-        altanticSet=[(m-1,i) for i in range(n)]+[(i,n-1) for i in range(m)]
-        # the map function:
-        # for every element (set) , we could change their type into list.
-        # 
-        return list(map(list,search(pacificSet)&search(altanticSet)))
-```
-
-值得注意的是map函数的使用，接下来我也考虑专门写一篇blog介绍
-
----
-
-# 820
-
-芜湖！
-
-今天七点半起的(实际上六点上了个厕所)
-
-因为没有枕头和被子，所以不太好睡233
-
-起来开班会了，做了个自我介绍。郑州大学陆炫之同学也是搞Blog的！虽然没有找他要友链就是了hhh，我的博客还不完善。
-
-下次有机会再说吧~
-
-然后上午选了下班委，因为不再我的职业规划内，所以没有参选。
-
-下次选举得做PPT，需要事无巨细，而不是口说无凭。
-
----
-
-中午恰食堂，有点小贵。
-
-下午逛了校园：
-
-+ 圈存机在公寓口
-+ 快递推车在十公寓服务处
-+ 顺丰在学园3
-
-热死了！帮生科院的王政同学拿了快递，下午大概四点钟回到宿舍。存了20水费和20网费。
-
-然后开始愉悦(痛苦)的刷题生活啦！
-
-六点左右，我下去拿了快递，终于到了！
-
-回来就是六点二十，跟梦磊一起去吃了个饭。明天开始要记录开销啦！
-
-晚上七点半，跟老潘逛了学校：
-
-+ 骑行前往西区，看了两弹一星的山、体育场、钟楼、图书馆
-+ 走路逛了下东区健身房
-
-晚间玩无期迷途，把NOX升到三阶了，其他没啥好说的捏。明早起来做体检吧
-
----
-
-今天的每日一题是个锤子。
-
-一行搞定：
-
-```python
-return sum([1 for i in range(len(startTime)) if startTime[i]>=queryTime>=startTime[i]])
-```
-
-但是今天又刷了俩好玩的题：
-
-+ 腐烂的橘子
-
-橘子哥我是通过bfs来实现同时控制的。
-
-对于这种污染扩散问题，为了避免重复遍历陷入死循环，我们一般需要让污染后的值不一样。比如这道橘子问题。而其他类型我们可以通过一个访问列表进行处理。本题的关键在于，如何控制变化时间，让所有感染点同时爆发。
-
-本质上，可以是一个超级源点(把所有污染点视作一次爆发点的子区间)问题。这类问题可以通过一个队列轻松deal
-
-我先说说我的解法：
-
-```python
-# first step
-# record initial rotting points
-
-# process:
-time=0
-while 1:
-	if remain eq. 0, do:
-	new_rotting=[]
-	time+=1
-	
-	# break out
-	while rotting,do:
-		i,j<-rotting.pop()
-		in four directions:
-			if grid[dirs] eq. 1:
-				make grid[dirs]<-2
-				add dirs into new_rotting 
-          rotting=new_rotting
-        if rottint eq. []:
-            break
-	
-```
-
-官方题解中用了迭代器和`any`函数，我会在明天的blog中进行记录。
-
-第二个题是417 太平洋大西洋水流问题
-
-然后先不说别的，新学了俩单词：
-
-+ pacific 平静的
-+ Atlantic 大西洋(亚特兰蒂斯)
-
-解锁成就：我在LeetCode学单词哈哈哈哈
-
-这玩意奇奇怪怪的，比南师大的压轴算法难多了，南师大的算法就是个寄吧
+这玩意奇奇怪怪的，比南师大的压轴算法难多了
 
 首先，如果遍历每个点，那势必会造成不必要的开销。
 
@@ -657,8 +500,6 @@ while 1:
 
 **每日一诗**
 
-> 
->
 > 兰陵美酒郁金香，玉碗盛来琥珀光。
 >
 > 但使主人能醉客，不知何处是他乡。
@@ -947,67 +788,6 @@ dp[i]=min(all(dp[i-r]+1))即可
 
 
 
----
-
-# 825
-
-## 怎么绘世呢
-
-上午是上午，下午是下午。
-
-上午自然是在看新生典礼，然后终于跟于老师联系上了。
-
-然后呢，老鼠到啦！
-
-一只小黄一只小白，大中午去拿的。
-
-中午吃的黄焖鸡，然后打了会无期迷途，又填了研究生登记表。
-
-晚上也没干啥，重新下回来了原和LOL，可以说，23是极度放纵的一天。LOL晚上还和林打了会，1点维护了。
-
----
-
-极其放纵的一天。我觉得，还是要秉承着我的人生小建议来活。
-
-**每日一题**
-
-+ #### [通过翻转子数组使两个数组相等](https://leetcode.cn/problems/make-two-arrays-equal-by-reversing-sub-arrays/)
-
-额，hash表直接AC
-
-+ #### [100. 相同的树](https://leetcode.cn/problems/same-tree/)
-
-用的bfs，写的有点多了，但很简单
-
-+ #### [199. 二叉树的右视图](https://leetcode.cn/problems/binary-tree-right-side-view/)
-
-同样的bfs过了，每次取最右边即可
-
-+ #### [416. 分割等和子集](https://leetcode.cn/problems/partition-equal-subset-sum/)
-
-背包问题！DP经典题！
-
-考虑能构成的所有结果，每次的结果可以由上一次递推上去。
-
-而且，可以通过空间压缩进行优化。
-
-而且！可以通过位运算进行压缩！
-
-
-这题有点经典！
-
-+ [152. 乘积最大子数组](https://leetcode.cn/problems/maximum-product-subarray/)
-
-152和53是差不多的，本质上也是dp问题，只不过152是双dp
-
-+ [最大子数组和](https://leetcode.cn/problems/maximum-subarray/)
-
-53也是典型dp，只不过需要注意起始段问题
-
----
-
-然后晚上基本上没干啥了。
-
 
 
 ---
@@ -1228,8 +1008,6 @@ emmmm....今天的高光谱是在宿舍上的，赵老师给我们重新展示�
 先是查看了spectral库，然后又在找如何将mat文件
 
 认识了穆昀昌老哥！！
-
-晚上的话，不知道怎么说，有些人自命清高？我会踏过这些人。考上来的？垃圾罢了
 
 ----
 
@@ -1684,7 +1462,7 @@ VITS
 
 一定要坚持住！
 
-坚持到我们能笑出来的那天！
+
 
 > 浮沉
 
